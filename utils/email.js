@@ -6,11 +6,11 @@ const Logger = require('../utils/logger');
 var request = require('request');
 const admin = require('firebase-admin');
 const urlBuilder = require('build-url');
-const functions = require('firebase-functions');
+// const functions = require('firebase-functions');
 
 const logger = new Logger();
 
-admin.initializeApp(functions.config().firebase);
+// admin.initializeApp(functions.config().firebase);
 
 // function sendEmail(data){
 // 	const token = Buffer.from('hapikey:e76610a4-caea-4a58-ae20-97d4f3e29a30').toString('base64')
