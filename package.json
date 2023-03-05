@@ -1,0 +1,31 @@
+{
+  "name": "crypto_app_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hubspot/api-client": "^8.5.0",
+    "@sendgrid/mail": "^7.7.0",
+    "@supercharge/strings": "^2.0.0",
+    "async": "^3.2.4",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "build-url": "^6.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fcm-node": "^1.6.1",
+    "firebase-admin": "^11.5.0",
+    "firebase-functions": "^4.2.1",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "pg": "^8.9.0",
+    "request": "^2.88.2",
+    "sendgrid": "^5.2.3",
+    "winston": "^3.8.2"
+  }
+}

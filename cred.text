@@ -1,0 +1,54 @@
+APP_NAME = 'growspace'
+APP_PORT= 3006
+NODE_ENV = 'development'
+
+JWT_SECRET='growspace@#1234'
+REFRESH_TOKEN_EXPIRES_IN='2d'
+
+
+//database
+DB_NAME = 'postgres';
+DB_PASS = 'Grow~#$123';
+DB_HOST = 'growspace.chnjdle3zgn3.ap-south-1.rds.amazonaws.com';
+DB_USER = 'postgres';
+DB_PORT = '5432';
+
+//mail
+SEND_MAIL_API_KEY = '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'
+USERNAME = ''
+fromMail = 'support@growspace.ai'
+
+//firebase urls
+baseUrl='https://growspace.page.link'
+appPackage = 'com.growspace.com'
+
+//urls
+hostURL='http://localhost:3006/api/v1/auth'
+
+//coinBase
+getCoinPriceUrl = 'https://api.coindcx.com/exchange/ticker'
+
+//aws
+AWS_ACCESS_KEY_ID = 'AKIA4CWMKUUQCZJULK4G'
+AWS_SECRET_ACCESS_KEY = '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'
+REGION = 'south'
+BUCKET_NAME = 'grows'
+
+// bureau kyc api url
+bureau_username = '6d1cfb34-63ce-4403-9aba-c4b75bd0d9c2'
+bureau_password = 'c8d33126-fca1-41d1-b269-1007b2016ef0'
+kycBaseUrl='https://api.overwatch.bureau.id/v1/suppliers'
+
+livenessCheckEndPoint = 'liveness-check'
+PanOcrEndPoint = 'pan-ocr'
+PanAuthEndPoint = 'pan-authentication'
+faceMatchEndPoint = 'id-face-match'
+OcrEndPoint = 'ocr'
+nameMatchEndPoint = 'name-match'
+bankVerificationEndPoint = 'bank-verification'
+
+// crypto apis
+cryptoBaseURL = 'rest.cryptoapis.io'
+walletId = '62de49494cb5f20007449970'
+cryptoApiKey = '44de0d9da9625958f46365500aa61d062e764b7f'
+network = 'mainnet'
