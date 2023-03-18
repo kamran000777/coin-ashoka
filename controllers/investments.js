@@ -1,4 +1,5 @@
 const investmentsDao = require('../dao/investments.js');
+const cryptoApiLogs = require('../dao/cryptoApiLogs');
 const RequestHandler = require('../utils/RequestHandler');
 const config = require('../config/appconfig');
 const Logger = require('../utils/logger');
@@ -24,12 +25,10 @@ async function getUserDashboard(req,res,next){
 
     try{
         const user = auth.getUserInfo(req);  
-        const result = (await investmentsDao.getUserDashboardData(user)).rows;
-        // const result = JSON.parse(dbresult[0]['fn_get_user_portfolio_latest_wrt_global_13_oct']);
+        const dbresult = (await investmentsDao.getUserDashboardData(user)).rows;
+        const result = JSON.parse(dbresult[0]['get_user_portfolio']);
   
-        const data = {user_details:result[0]};
-        console.log(data);
-
+        const data = result;
         requestHandler.sendSuccess(res, 'Success',data);
     }catch(error){
         requestHandler.sendError(req, res, error);
@@ -80,5 +79,45 @@ async function getEligibleInvestmentForSendmail(req,res,next){
     }
 }
 
-module.exports = {getUserPortfolio,getUserDashboard,getCoinData,getOrderHistory,getEligibleInvestmentForSendmail}
+async function initiateCryptoTxnRequest(req, res, next) {
+    try {
+
+        const user = auth.getUserInfo(req);
+
+        const result = (await investmentsDao.insertCryptoTxnLogs(user)).rows;
+        var reqid = result[0]['reqid'];
+        requestHandler.sendSuccess(res, 'Success', { reqid });
+    } catch (error) {
+        requestHandler.sendError(req, res, error);
+    }
+}
+
+async function updateCryptoTxnStatus(req, res, next) {
+    try {
+        const result = (await investmentsDao.updateCryptoTxnStatus(req.body)).rows;
+        requestHandler.sendSuccess(res, 'Success', result);
+    } catch (error) {
+        requestHandler.sendError(req, res, error);
+    }
+}
+async function pushOnmetaLatestTxn(req, res, next) {
+    try {
+
+        console.log("response webhook:", req.body);
+        var network=null;
+
+        if(req.body.chainId==137){
+            network = "Polygon";
+        }
+
+        const response = (await cryptoApiLogs.insertCryptoWebhookOrders(req.body.orderId,req.body.receiverWalletAddress,req.body.status,req.body.currency,'Buy',req.body.fiat,network,req.body.buyTokenSymbol,req.body.createdAt,req.body.transferredAmount,req.body.txnHash,req.body.buyTokenAddress)).rows;
+        if(!response[0]){
+            return requestHandler.sendErrorMsg(res, 'Error', response, 403);
+        }
+        requestHandler.sendSuccess(res, 'Success', response);
+    } catch (error) {
+        requestHandler.sendError(req, res, error);
+    }
+}
+module.exports = {getUserPortfolio,getUserDashboard,getCoinData,getOrderHistory,getEligibleInvestmentForSendmail,initiateCryptoTxnRequest,updateCryptoTxnStatus,pushOnmetaLatestTxn}
 

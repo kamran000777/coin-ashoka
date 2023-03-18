@@ -1,7 +1,7 @@
 //import crypto from 'crypto-random-string';
 
 const usersDao = require('../dao/users');
-// const referrals = require('../dao/referrals.js');
+const investmentsDao = require('../dao/investments.js');
 // const wallet = require('../controllers/wallet.js');
 // const userCryptoDepositWalletAddresses = require('../dao/userCryptoDepositWalletAddresses.js');
 const RequestHandler = require('../utils/RequestHandler');
@@ -56,6 +56,7 @@ async function signup(req, res, next) {
             return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
         }
 
+        await investmentsDao.insertEntryInInvestment(userdata[0]['id']);
         if (!is_verified) {
             const tokenResult = await usersDao.createVerificationToken(userdata[0]['id'], emailToken);
             const tokenInfo = tokenResult.rows;

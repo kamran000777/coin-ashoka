@@ -1,10 +1,10 @@
 const router = require('express').Router();
 // const usersRoutes = require('./users');
 const authRoutes = require('./auth');
-// const walletRoutes = require('./wallet');
+const walletRoutes = require('./wallet');
 // const kycRoutes = require('./kyc');
 const investmentRoutes = require('./investments');
-// const faqRoutes = require('./faq');
+const faqRoutes = require('./faq');
 // const queriesRoutes = require('./queries');
 // const insightsRoutes = require('./insights');
 // const notificationsRoutes = require('./notifications');
@@ -20,10 +20,10 @@ router.get('/test',(req,res,next) =>{
 
 // router.use('/users',usersRoutes);
 router.use('/auth',authRoutes);
-// router.use('/wallet',walletRoutes);
+router.use('/wallet',walletRoutes);
 router.use('/investments',investmentRoutes);
 // router.use('/kyc',kycRoutes);
-// router.use('/faq',faqRoutes);
+router.use('/faq',faqRoutes);
 // router.use('/queries',queriesRoutes);
 // router.use('/insights',insightsRoutes);
 // router.use('/notifications',notificationsRoutes);
