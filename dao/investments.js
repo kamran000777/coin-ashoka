@@ -32,7 +32,7 @@ function getEligibleInvestments(){
 
 
 function insertEntryInInvestment(id){
-    const query = `insert into investments (user_id,coin_id,amount,quantity,usdc_amount) values ($1,0,0,0,0)`;
+    const query = `insert into investments (user_id,coin_id,amount,quantity,usdc_amount) values ($1,1,0,0,0)`;
     return db.query(query,[id]);
 }
 

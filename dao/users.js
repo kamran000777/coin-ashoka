@@ -132,6 +132,11 @@ function updatePan(userinfo,url,pan_name){
     return db.query(query,[userinfo[0]['id'],url,pan_name]);
 }
 
+function updateInvestmentTableEntry(userinfo){
+    const query = 'update users set is_invesment_table_created=true where id=$1';
+    return db.query(query,[userinfo[0]['id']]);
+}
+
 // function updatePan(userinfo,pan_name){
 //     console.log("Pan name ",pan_name);
 //     const query = 'update users set pan_name=$2 where id=$1 returning id';
@@ -181,4 +186,4 @@ function updateIsPledge(userinfo,isPledge){
 module.exports = {get,create,logout,getWrtPwd,createGoogleAccount,createVerificationToken,insertOtp,verifyOtp,changePassword,
     verifyToken,updateTokenStatus,updateSipAmount,updateProfileImage,updateAadhar,updatePan,insertBankDetails,getInfoWrtId,updateKyc,
     updateVerifiedFlag,getUserProfile,clearEntryFromVerificationToken,resetPassword,changeEmail,deleteAccount,updateLoginInfo,getKycStatus,getAllUsers,verifyWithdrawalOtp,
-     createAppleAccount, updateUserInfo,updateIsPledge,updateOnboardedViewedFlag}
+     createAppleAccount, updateUserInfo,updateIsPledge,updateOnboardedViewedFlag,updateInvestmentTableEntry}

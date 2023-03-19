@@ -102,6 +102,13 @@ async function login(req, res, next) {
             return requestHandler.sendSuccess(res, 'Email is not verified.Please verify your email.', null, 400);
         }
 
+        if(!userdata[0]['is_invesment_table_created']){
+          await investmentsDao.insertEntryInInvestment(userdata[0]['id']); 
+          await usersDao.updateInvestmentTableEntry(userdata);
+        }
+
+        
+
         // const walletAddress = (await userCryptoDepositWalletAddresses.getCryptoAddress(userdata[0]['id'])).rows;
 
         // if(!walletAddress[0]){
@@ -150,6 +157,10 @@ async function googleLogin(req, res, next) {
         // if(!walletAddress[0]){
         //     await wallet.generateDepositAddress(userdata[0]['id'],userdata[0]['email']);
         // }
+        if(!userdata[0]['is_invesment_table_created']){
+            await investmentsDao.insertEntryInInvestment(userdata[0]['id']); 
+            await usersDao.updateInvestmentTableEntry(userdata);
+          }
 
         const token = jwt.sign({ data: userdata }, config.auth.jwt_secret, { expiresIn: config.auth.jwt_expiresin, algorithm: 'HS512' });
 
@@ -181,6 +192,11 @@ async function appleLogin(req, res, next) {
                 return requestHandler.sendError(req, res, error);
             }
         }
+
+        if(!userdata[0]['is_invesment_table_created']){
+            await investmentsDao.insertEntryInInvestment(userdata[0]['id']); 
+            await usersDao.updateInvestmentTableEntry(userdata);
+          }
 
         // const referralResult = (await referrals.getReferralCode(userdata)).rows;
         // const referralDetails = JSON.parse(referralResult[0]['fn_get_referral_details']);
