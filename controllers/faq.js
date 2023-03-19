@@ -17,7 +17,6 @@ async function getFaqData(req, res) {
 async function getAboutData(req, res) {
     try {
         const result =  faqDao.about;
-        console.log("result",result);
         requestHandler.sendSuccess(res, 'Success', result);
     } catch (error) {
         requestHandler.sendError(req, res, error);

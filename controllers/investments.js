@@ -103,7 +103,6 @@ async function updateCryptoTxnStatus(req, res, next) {
 async function pushOnmetaLatestTxn(req, res, next) {
     try {
 
-        console.log("response webhook:", req.body);
         var network=null;
 
         if(req.body.chainId==137){
@@ -111,6 +110,7 @@ async function pushOnmetaLatestTxn(req, res, next) {
         }
 
         const response = (await cryptoApiLogs.insertCryptoWebhookOrders(req.body.orderId,req.body.receiverWalletAddress,req.body.status,req.body.currency,'Buy',req.body.fiat,network,req.body.buyTokenSymbol,req.body.createdAt,req.body.transferredAmount,req.body.txnHash,req.body.buyTokenAddress)).rows;
+        console.log("webhook ",response[0]);
         if(!response[0]){
             return requestHandler.sendErrorMsg(res, 'Error', response, 403);
         }
