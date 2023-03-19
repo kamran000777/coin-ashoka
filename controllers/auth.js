@@ -42,7 +42,6 @@ async function signup(req, res, next) {
         }
 
         const encryptPass = await auth.isEncryptPass(req.body.password);
-        console.log("Encrypt Pass is :", encryptPass);
 
         const emailToken = Str.random(16);
 
@@ -56,7 +55,6 @@ async function signup(req, res, next) {
             return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
         }
 
-        await investmentsDao.insertEntryInInvestment(userdata[0]['id']);
         if (!is_verified) {
             const tokenResult = await usersDao.createVerificationToken(userdata[0]['id'], emailToken);
             const tokenInfo = tokenResult.rows;

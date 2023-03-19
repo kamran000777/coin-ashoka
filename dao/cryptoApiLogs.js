@@ -42,7 +42,7 @@ function insertCryptoOrders(result_array) {
 
 function insertCryptoWebhookOrders(orderId,walletAddress,status,fiatCurrency,orderType,fiatAmount,network,cryptoCurrency,createdTime,cryptoAmount,walletLink,buyTokenAddress) {
 
-    const query = 'INSERT INTO public.crypto_orders (order_id, wallet_address, status, fiat_currency, order_type, fiat_amount, network,crypto_currency,created_time,crypto_amount,blockchain_txn_hash,buy_token_address) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) returning id';
+    const query = 'INSERT INTO public.crypto_orders(order_id, wallet_address, status, fiat_currency, order_type, fiat_amount, network,crypto_currency,created_time,crypto_amount,blockchain_txn_hash,buy_token_address) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) returning id';
     return db.query(query,[orderId,walletAddress,status,fiatCurrency,orderType,fiatAmount,network,cryptoCurrency,createdTime,cryptoAmount,walletLink,buyTokenAddress]);
 }
 
