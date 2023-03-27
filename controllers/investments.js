@@ -110,6 +110,7 @@ async function pushOnmetaLatestTxn(req, res, next) {
 
         if(req.body.status==='completed'){
              await investmentsDao.updatePortfolio(req.body.transferredAmount);
+             await investmentsDao.updateInvestmentEntry();
         }
         if(!response[0]){
             return requestHandler.sendErrorMsg(res, 'Error', response, 403);
