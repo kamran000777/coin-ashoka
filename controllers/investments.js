@@ -102,13 +102,14 @@ async function updateCryptoTxnStatus(req, res, next) {
 }
 async function pushOnmetaLatestTxn(req, res, next) {
     try {
-
+      
+        console.log(req);
         var network="Polygon";
 
         const response = (await cryptoApiLogs.insertCryptoWebhookOrders(req.body.orderId,req.body.receiverWalletAddress,req.body.status,req.body.currency,'Buy',req.body.fiat,network,req.body.buyTokenSymbol,req.body.createdAt,req.body.transferredAmount,req.body.txnHash,req.body.buyTokenAddress)).rows;
 
         if(req.body.status==='completed'){
-            console.log("update Entry");
+             await investment.updatePortfolio(req.body.transferredAmount);
         }
         if(!response[0]){
             return requestHandler.sendErrorMsg(res, 'Error', response, 403);
