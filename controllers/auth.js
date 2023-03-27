@@ -55,22 +55,24 @@ async function signup(req, res, next) {
             return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
         }
 
-        if (!is_verified) {
-            const tokenResult = await usersDao.createVerificationToken(userdata[0]['id'], emailToken);
-            const tokenInfo = tokenResult.rows;
+        // if (!is_verified) {
+        //     const tokenResult = await usersDao.createVerificationToken(userdata[0]['id'], emailToken);
+        //     const tokenInfo = tokenResult.rows;
 
-            if (tokenInfo[0]['id'] == null) {
-                return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
-            }
-            // const emailResponse = await email.sendVerificationEmail(userdata[0]['email'], emailToken);
-            console.log("Email Response is :", emailToken);
-        }
+        //     if (tokenInfo[0]['id'] == null) {
+        //         return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
+        //     }
+        //     // const emailResponse = await email.sendVerificationEmail(userdata[0]['email'], emailToken);
+        //     console.log("Email Response is :", emailToken);
+        // }
 
         // let referral_code = referralCodeGenerator.alpha('uppercase', 5);
         // await referrals.createReferralCode(userdata, referral_code);
         const result = { userdetails: userdata[0] };
         await db.query('COMMIT');
-        requestHandler.sendSuccess(res, 'User Registered Successfully and sent verification link on mail. Please verify your email.', result);
+        // requestHandler.sendSuccess(res, 'User Registered Successfully and sent verification link on mail. Please verify your email.', result);
+        requestHandler.sendSuccess(res, 'User Registered Successfully and Login to continue.', result);
+
     } catch (error) {
         await db.query('ROLLBACK');
         requestHandler.sendError(req, res, error);

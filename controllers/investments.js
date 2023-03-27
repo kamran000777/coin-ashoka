@@ -52,7 +52,7 @@ async function getOrderHistory(req, res){
     try {
         const user = auth.getUserInfo(req);
         const dbresult = (await investmentsDao.getOrderHistory(user)).rows;
-        const result = JSON.parse(dbresult[0]['fn_get_order_history_wrt_user_global_04_oct']);
+        const result = JSON.parse(dbresult[0]['fn_get_transaction_history']);
         requestHandler.sendSuccess(res, 'Success', result);
     } catch (error) {
         requestHandler.sendError(req, res, error);
@@ -104,7 +104,6 @@ async function pushOnmetaLatestTxn(req, res, next) {
     try {
 
         var network="Polygon";
-        console.log("webhook",req.body['abi']);
 
         const response = (await cryptoApiLogs.insertCryptoWebhookOrders(req.body.orderId,req.body.receiverWalletAddress,req.body.status,req.body.currency,'Buy',req.body.fiat,network,req.body.buyTokenSymbol,req.body.createdAt,req.body.transferredAmount,req.body.txnHash,req.body.buyTokenAddress)).rows;
 

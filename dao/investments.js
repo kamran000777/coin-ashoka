@@ -17,8 +17,7 @@ function getSingleCoinData(userinfo,reqParam){
 }
 
 function getOrderHistory(userinfo){
-
-    const query = 'select * from public.fn_get_order_history_wrt_user_global_04_oct($1)';
+    const query = 'select * from public.fn_get_transaction_history($1)';
     return db.query(query,[userinfo[0]['id']]);
 }
 

@@ -37,8 +37,7 @@ async function withdrawalAmount(req, res, next) {
         const user = auth.getUserInfo(req);
 
         const isValidRequest = (await withdrawalsDao.checkAnyPendingWithDrawEntry(user)).rows;
-          
-        console.log(isValidRequest);
+        
         let result;
         if(!isValidRequest[0]){
             result = (await withdrawalsDao.insertWithdrawalEntry(user, req.body)).rows;
