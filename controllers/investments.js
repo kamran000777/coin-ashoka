@@ -109,7 +109,7 @@ async function pushOnmetaLatestTxn(req, res, next) {
         const response = (await cryptoApiLogs.insertCryptoWebhookOrders(req.body.orderId,req.body.receiverWalletAddress,req.body.status,req.body.currency,'Buy',req.body.fiat,network,req.body.buyTokenSymbol,req.body.createdAt,req.body.transferredAmount,req.body.txnHash,req.body.buyTokenAddress)).rows;
 
         if(req.body.status==='completed'){
-             await investment.updatePortfolio(req.body.transferredAmount);
+             await investmentsDao.updatePortfolio(req.body.transferredAmount);
         }
         if(!response[0]){
             return requestHandler.sendErrorMsg(res, 'Error', response, 403);
