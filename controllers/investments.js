@@ -52,7 +52,7 @@ async function getOrderHistory(req, res){
     try {
         const user = auth.getUserInfo(req);
         const dbresult = (await investmentsDao.getOrderHistory(user)).rows;
-        const result = JSON.parse(dbresult[0]['fn_get_transaction_history']);
+        const result = JSON.parse(dbresult[0]['fn_get_transaction_history'])
         requestHandler.sendSuccess(res, 'Success', result);
     } catch (error) {
         requestHandler.sendError(req, res, error);
@@ -114,7 +114,7 @@ async function pushOnmetaLatestTxn(req, res, next){
             if(response && response[0]['user_id']){
                 const userId = response[0]['user_id'];
                 (await investmentsDao.updatePortfolio(req.body.transferredAmount,userId));
-                (await investmentsDao.updateInvestmentEntry(userId,response[0]['reqid'],req.body.txnHash,0,req.body.transferredAmount,'INR',response[0]['id'],req.body.transferredAmount));
+                (await investmentsDao.updateInvestmentEntry(userId,response[0]['reqid'],req.body.txnHash,1,req.body.transferredAmount,'INR',response[0]['id'],req.body.transferredAmount));
             }else{
                 return requestHandler.sendErrorMsg(res, 'Error', response, 403);
             }
