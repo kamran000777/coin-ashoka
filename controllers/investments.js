@@ -109,7 +109,7 @@ async function pushOnmetaLatestTxn(req, res, next){
 
         if(req.body.status==='completed'){
 
-            const response = (await investmentsDao.checkCryptoLogEntry(req.body.orderId)).rows;
+            const response = (await investmentsDao.checkCryptoLogEntry(req.body.orderId)).rows
              
             if(response && response[0]['user_id']){
                 const userId = response[0]['user_id'];
