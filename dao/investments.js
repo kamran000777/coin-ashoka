@@ -31,7 +31,7 @@ function getEligibleInvestments(){
 
 
 function insertEntryInInvestment(id){
-    const query = `insert into investments (user_id,coin_id,amount,quantity,usdc_amount) values ($1,1,0,0,0)`;
+    const query = `insert into investments (user_id,coin_id,amount,quantity,usdc_amount,currency) values ($1,1,0,0,0,'INR')`;
     return db.query(query,[id]);
 }
 
@@ -47,14 +47,19 @@ function updateCryptoTxnStatus(resData){
 }
 
 function updateInvestmentEntry(id,reqid,tnxId,status,amount,currency,crypto_order_id,usdc_amount){
-    const query = `insert into deposits(user_id,reqid,txnid,status,amount,currency,usdt_amount,crypto_order_id,usdc_amount,tnx_type)  values($1,$2,$3,$4,$5,$6,0,$7,$8,'Buy') returning user_id`;
+    const query = `insert into deposits(user_id,reqid,txnid,status,amount,currency,usdt_amount,crypto_order_id,usdc_amount,tnx_type)  values($1,$2,$3,$4,public.get_crypto_quantity($5),$6,0,$7,$8,'Buy') returning user_id`;
     return db.query(query,[id,reqid,tnxId,status,amount,currency,crypto_order_id,usdc_amount]);
 }
 
-function updatePortfolio(amount,quantity,id){
-    const query = 'update investments set amount=amount+public.get_crypto_quantity($2), quantity=quantity+$2 where user_id=$3 returning user_id';
-    return db.query(query,[amount,quantity,id]);
+function updatePortfolio(quantity,id){
+    const query = 'update investments set amount=amount+public.get_crypto_quantity($1), quantity=quantity+$1 where user_id=$2 returning user_id';
+    return db.query(query,[quantity,id]);
+}
+
+function checkCryptoLogEntry(orderId){
+  const query = `select id, user_id,reqid from (SELECT id, user_id,reqid,res_body::json->>'orderId' as orderId FROM crypto_txn_api_logs ctal ) AS table_1 where orderId ILIKE $1`;
+  return db.query(query,[`%${orderId}%`]);
 }
 
 
-module.exports = {getUserPortfolio,getUserDashboardData,getSingleCoinData,getOrderHistory,getEligibleInvestments,insertEntryInInvestment,insertCryptoTxnLogs,updateCryptoTxnStatus,updateInvestmentEntry,updatePortfolio}
+module.exports = {getUserPortfolio,getUserDashboardData,getSingleCoinData,getOrderHistory,getEligibleInvestments,insertEntryInInvestment,insertCryptoTxnLogs,updateCryptoTxnStatus,updateInvestmentEntry,updatePortfolio,checkCryptoLogEntry}

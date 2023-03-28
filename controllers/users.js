@@ -39,7 +39,7 @@ async function getCryptoCoinLatestPrices() {
         const result = await common.getCoinPrices();
         
         const cryptoPrice = result['currenct_prices']['USDCINR'];
-        console.log(Number(cryptoPrice).toFixed(4));
+
         await coinsDao.insertLatestCoinPrices(Number(cryptoPrice).toFixed(4));
         return 1;
         //requestHandler.sendSuccess(res, 'Success', data);

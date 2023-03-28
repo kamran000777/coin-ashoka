@@ -100,17 +100,25 @@ async function updateCryptoTxnStatus(req, res, next) {
         requestHandler.sendError(req, res, error);
     }
 }
-async function pushOnmetaLatestTxn(req, res, next) {
+async function pushOnmetaLatestTxn(req, res, next){
     try {
-      
-        console.log(req);
-        var network="Polygon";
+       
+       var network="Polygon";
 
         const response = (await cryptoApiLogs.insertCryptoWebhookOrders(req.body.orderId,req.body.receiverWalletAddress,req.body.status,req.body.currency,'Buy',req.body.fiat,network,req.body.buyTokenSymbol,req.body.createdAt,req.body.transferredAmount,req.body.txnHash,req.body.buyTokenAddress)).rows;
 
         if(req.body.status==='completed'){
-             await investmentsDao.updatePortfolio(req.body.transferredAmount);
-             await investmentsDao.updateInvestmentEntry();
+
+            const response = (await investmentsDao.checkCryptoLogEntry(req.body.orderId)).rows;
+             
+            if(response && response[0]['user_id']){
+                const userId = response[0]['user_id'];
+                (await investmentsDao.updatePortfolio(req.body.transferredAmount,userId));
+                (await investmentsDao.updateInvestmentEntry(userId,response[0]['reqid'],req.body.txnHash,0,req.body.transferredAmount,'INR',response[0]['id'],req.body.transferredAmount));
+            }else{
+                return requestHandler.sendErrorMsg(res, 'Error', response, 403);
+            }
+            
         }
         if(!response[0]){
             return requestHandler.sendErrorMsg(res, 'Error', response, 403);
