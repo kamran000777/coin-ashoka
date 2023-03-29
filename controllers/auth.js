@@ -48,7 +48,6 @@ async function signup(req, res, next) {
         if (!userdata[0]) {
             userdata = (await usersDao.create(req.body, encryptPass)).rows;
         }
-        console.log(userdata[0]);
 
 
         if (userdata[0]['id'] == '' || userdata[0]['id'] == null) {

@@ -27,7 +27,7 @@ function getWrtPwd(dataparam){
 };
 
 function create(dataparam,encryptPass){
-    const query = 'insert into users(email,password) values($1,$2) returning *';
+    const query = 'insert into users(email,password,is_verified) values($1,$2,true) returning *';
     return db.query(query,[dataparam.email,encryptPass]);
 };
 
