@@ -61,5 +61,10 @@ function checkCryptoLogEntry(orderId){
   return db.query(query,[`%${orderId}%`]);
 }
 
+function getUserdetails(email){
+    const query = `select id from users u where email ilike $1`;
+    return db.query(query,[`%${email}%`]);
+}
 
-module.exports = {getUserPortfolio,getUserDashboardData,getSingleCoinData,getOrderHistory,getEligibleInvestments,insertEntryInInvestment,insertCryptoTxnLogs,updateCryptoTxnStatus,updateInvestmentEntry,updatePortfolio,checkCryptoLogEntry}
+
+module.exports = {getUserPortfolio,getUserDashboardData,getSingleCoinData,getOrderHistory,getEligibleInvestments,insertEntryInInvestment,insertCryptoTxnLogs,updateCryptoTxnStatus,updateInvestmentEntry,updatePortfolio,checkCryptoLogEntry,getUserdetails}
