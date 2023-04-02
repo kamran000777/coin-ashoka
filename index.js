@@ -38,6 +38,7 @@ app.listen(port, (err) => {
 )
 
 if (port == 3000) {
+
     // 10 minute Cron Job for get latest crypto prices
     cron.schedule('0 */10 * * * *', () => {
         //console.log('running a task every 10 minute');
