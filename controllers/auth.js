@@ -15,7 +15,6 @@ const email = require('../utils/email');
 const logger = new Logger();
 const requestHandler = new RequestHandler(logger);
 const {Str} = require('@supercharge/strings')
-// let referralCodeGenerator = require('referral-code-generator');
 
 const { db } = require('../utils/dbconfig.js');
 
@@ -34,7 +33,7 @@ async function signup(req, res, next) {
             is_verified = userdata[0]['is_verified'];
 
             if (userdata[0]['is_deleted']) {
-                return requestHandler.sendSuccess(res, 'Your account is deleted.Please contact with growspace support', userdata[0], 400);
+                return requestHandler.sendSuccess(res, 'Your account is deleted. Please contact with Coin Aska support', userdata[0], 400);
             }
             if (userdata[0]['email'] != null) {
                 return requestHandler.sendSuccess(res, 'User already exists', {}, 400);
@@ -61,8 +60,7 @@ async function signup(req, res, next) {
         //     if (tokenInfo[0]['id'] == null) {
         //         return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
         //     }
-        //     // const emailResponse = await email.sendVerificationEmail(userdata[0]['email'], emailToken);
-        //     console.log("Email Response is :", emailToken);
+        //     const emailResponse = await email.sendVerificationEmail(userdata[0]['email'], emailToken);
         // }
 
         // let referral_code = referralCodeGenerator.alpha('uppercase', 5);
@@ -70,7 +68,7 @@ async function signup(req, res, next) {
         const result = { userdetails: userdata[0] };
         await db.query('COMMIT');
         // requestHandler.sendSuccess(res, 'User Registered Successfully and sent verification link on mail. Please verify your email.', result);
-        requestHandler.sendSuccess(res, 'User Registered Successfully and Login to continue.', result);
+        requestHandler.sendSuccess(res, 'User Registered. Login to continue.', result);
 
     } catch (error) {
         await db.query('ROLLBACK');
@@ -230,7 +228,6 @@ async function emailVerification(req, res) {
     try {
         const dbresult = await usersDao.get(req.query);
         var userdata = dbresult.rows;
-        console.log('Data :', userdata);
 
         if (!userdata[0]['email']) {
             return requestHandler.sendSuccess(res, 'Email not found', null, 403);
@@ -263,7 +260,6 @@ async function emailVerification(req, res) {
 async function logout(req, res, next) {
     try {
         const user = auth.getUserInfo(req);
-        console.log('User Data:', user);
         await usersDao.logout(user);
         requestHandler.sendSuccess(res, 'User logged out Successfully');
     } catch (error) {
@@ -274,7 +270,6 @@ async function logout(req, res, next) {
 
 async function forgotPassword(req, res, next) {
     try {
-        console.log('Request Body is:', req.body);
         const dbresult = await usersDao.get(req.body);
         var userdata = dbresult.rows;
         console.log('Data :', userdata);

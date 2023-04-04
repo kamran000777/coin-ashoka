@@ -121,15 +121,9 @@ function sendGridEmail(
 }
 
 function sendPasswordResetEmail(to, token) {
-	const hostUrl = process.env.hostURL;
-	const baseUrl = process.env.baseUrl;
-	const appPackage = process.env.appPackage;
+	
 	const link = makeDynamicLongLink("resetPassword", token, to);//`${baseUrl}/?link=${hostUrl}/resetPassword?token=${token}&email=${to}&apn=${appPackage}`
 
-	// console.log("Host",hostUrl);
-	// console.log("baseUrl",baseUrl);
-	// console.log("link",link);
-	// console.log("Mail Key",process.env.SEND_MAIL_API_KEY);
 	const request = sg.emptyRequest({
 		method: "POST",
 		path: "/v3/mail/send",
@@ -141,11 +135,11 @@ function sendPasswordResetEmail(to, token) {
 							email: to
 						}
 					],
-					subject: "Growspace : Reset Your Password"
+					subject: "Coin Aska : Reset Your Password"
 				}
 			],
 			from: {
-				email: process.env.fromMail
+				email: process.env.FROM_EMAIL
 			},
 			content: [
 				{
@@ -239,7 +233,7 @@ function sendPasswordResetEmail(to, token) {
 																 <tbody>
 																	<tr>
 																	   <td align="center" valign="top" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; color:#23496d; word-break:break-word; text-align:center; padding:10px 20px; font-size:0px">
-																		  <img alt="Growspace 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Growspace%2002.png?width=400&amp;upscale=true&amp;name=Growspace%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
+																		  <img alt="Coin Aska 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Coin Aska%2002.png?width=400&amp;upscale=true&amp;name=Coin Aska%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
 																	   </td>
 																	</tr>
 																 </tbody>
@@ -294,7 +288,7 @@ function sendPasswordResetEmail(to, token) {
 																	   <td class="hs_padded" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:10px 20px">
 																		  <div id="hs_cos_wrapper_module-0-0-0" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="module">
 																			 <div id="hs_cos_wrapper_module-0-0-0_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text">
-																				<p style="mso-line-height-rule:exactly; line-height:175%">Hello! <br>We have received a password reset request for your Growspace Account<br>Click on the link below to set a new password for your account.</p>
+																				<p style="mso-line-height-rule:exactly; line-height:175%">Hello! <br>We have received a password reset request for your Coin Aska Account<br>Click on the link below to set a new password for your account.</p>
 																			 </div>
 																		  </div>
 																	   </td>
@@ -337,7 +331,7 @@ function sendPasswordResetEmail(to, token) {
 																				<p style="mso-line-height-rule:exactly; line-height:175%">If you did not initiate the process, no further action is required.</p>
 																				<p style="mso-line-height-rule:exactly; line-height:175%; margin-bottom:10px; font-weight:normal">&nbsp;</p>
 																				<p style="mso-line-height-rule:exactly; line-height:175%; font-weight:normal">Regards,</p>
-																				<p style="mso-line-height-rule:exactly; line-height:175%; font-weight:normal">Team Growspace</p>
+																				<p style="mso-line-height-rule:exactly; line-height:175%; font-weight:normal">Team Coin Aska</p>
 																			 </div>
 																		  </div>
 																	   </td>
@@ -387,7 +381,7 @@ function sendPasswordResetEmail(to, token) {
 																							   <tbody>
 																								  <tr align="center">
 																									 <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-																										<a href="https://instagram.com/growspace.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+																										<a href="https://instagram.com/Coin Aska.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 																										<img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/instagram_circle_color.png" alt="Instagram" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
 																										</a>
 																									 </td>
@@ -400,7 +394,7 @@ function sendPasswordResetEmail(to, token) {
 																							   <tbody>
 																								  <tr align="center">
 																									 <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-																										<a href="https://www.linkedin.com/company/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+																										<a href="https://www.linkedin.com/company/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 																										<img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/linkedin_circle_color.png" alt="LinkedIn" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
 																										</a>
 																									 </td>
@@ -413,7 +407,7 @@ function sendPasswordResetEmail(to, token) {
 																							   <tbody>
 																								  <tr align="center">
 																									 <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-																										<a href="https://twitter.com/growspaceai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+																										<a href="https://twitter.com/Coin Askaai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 																										<img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/twitter_circle_color.png" alt="Twitter" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
 																										</a>
 																									 </td>
@@ -426,7 +420,7 @@ function sendPasswordResetEmail(to, token) {
 																							   <tbody>
 																								  <tr align="center">
 																									 <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-																										<a href="https://www.facebook.com/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+																										<a href="https://www.facebook.com/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 																										<img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/facebook_circle_color.png" alt="Facebook" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
 																										</a>
 																									 </td>
@@ -520,14 +514,7 @@ function sendPasswordResetEmail(to, token) {
 }
 
 function sendVerificationEmail(to, token) {
-	const hostUrl = process.env.hostURL;
-	const baseUrl = process.env.baseUrl;
-	const appPackage = process.env.appPackage;
-
-	console.log("Host", hostUrl);
 	const link = makeDynamicLongLink("emailVerification", token, to);//`${baseUrl}/?link=${urlLink}&apn=${appPackage}`
-	// console.log("link",link);
-	// console.log("Mail Key",process.env.SEND_MAIL_API_KEY);
 	const request = sg.emptyRequest({
 		method: "POST",
 		path: "/v3/mail/send",
@@ -539,11 +526,11 @@ function sendVerificationEmail(to, token) {
 							email: to
 						}
 					],
-					subject: "Growspace : Verify Your E-mail Address"
+					subject: "Coin Aska : Verify Your E-mail Address"
 				}
 			],
 			from: {
-				email: process.env.fromMail
+				email: process.env.FROM_EMAIL
 			},
 			content: [
 				{
@@ -680,7 +667,7 @@ function sendVerificationEmail(to, token) {
 							<tr>
 								<td align="center" valign="top" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; color:#23496d; word-break:break-word; text-align:center; padding:10px 20px; font-size:0px">
 									
-									<img alt="Growspace 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Growspace%2002.png?width=400&amp;upscale=true&amp;name=Growspace%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
+									<img alt="Coin Aska 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Coin Aska%2002.png?width=400&amp;upscale=true&amp;name=Coin Aska%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
 									
 								</td>
 							</tr>
@@ -719,7 +706,7 @@ function sendVerificationEmail(to, token) {
 					<![endif]-->
 					<div id="column-0-0" class="hse-column hse-size-12">
 					  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0 !important; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt"><tbody><tr><td class="hs_padded" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:10px 20px"><div id="hs_cos_wrapper_module-0-0-0" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="module"><div id="hs_cos_wrapper_module-0-0-0_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p style="mso-line-height-rule:exactly; line-height:175%">Hello!</p>
-					<p style="mso-line-height-rule:exactly; line-height:175%">Welcome to Growspace!</p>
+					<p style="mso-line-height-rule:exactly; line-height:175%">Welcome to Coin Aska!</p>
 					<p style="mso-line-height-rule:exactly; line-height:175%">You are almost ready to get started. To complete the Sign-up process, click on the link below to verify your E-mail account.</p></div></div></td></tr></tbody></table>
 					<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0 !important; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt"><tbody><tr><td class="hs_padded" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:10px 20px"><div id="hs_cos_wrapper_module_16593564497803" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="module"><!-- button_email.module - email-default-modules -->
 					
@@ -773,7 +760,7 @@ function sendVerificationEmail(to, token) {
 					<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0 !important; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt"><tbody><tr><td class="hs_padded" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:10px 20px"><div id="hs_cos_wrapper_module_16593564248482" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="module"><div id="hs_cos_wrapper_module_16593564248482_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p style="mso-line-height-rule:exactly; line-height:175%">If you did not create the account, no further action is required.</p>
 					<p style="mso-line-height-rule:exactly; line-height:175%; margin-bottom:10px; font-weight:normal">&nbsp;</p>
 					<p style="mso-line-height-rule:exactly; line-height:175%; font-weight:normal">Regards,</p>
-					<p style="mso-line-height-rule:exactly; line-height:175%; font-weight:normal">Team Growspace</p></div></div></td></tr></tbody></table>
+					<p style="mso-line-height-rule:exactly; line-height:175%; font-weight:normal">Team Coin Aska</p></div></div></td></tr></tbody></table>
 					</div>
 					<!--[if gte mso 9]></table><![endif]-->
 					<!--[if (mso)|(IE)]></td><![endif]-->
@@ -820,7 +807,7 @@ function sendVerificationEmail(to, token) {
 								<tr align="center">
 								  
 								  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-									<a href="https://instagram.com/growspace.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+									<a href="https://instagram.com/Coin Aska.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 									  
 									  
 									  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/instagram_circle_color.png" alt="Instagram" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -840,7 +827,7 @@ function sendVerificationEmail(to, token) {
 								<tr align="center">
 								  
 								  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-									<a href="https://www.linkedin.com/company/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+									<a href="https://www.linkedin.com/company/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 									  
 									  
 									  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/linkedin_circle_color.png" alt="LinkedIn" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -860,7 +847,7 @@ function sendVerificationEmail(to, token) {
 								<tr align="center">
 								  
 								  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-									<a href="https://twitter.com/growspaceai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+									<a href="https://twitter.com/Coin Askaai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 									  
 									  
 									  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/twitter_circle_color.png" alt="Twitter" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -880,7 +867,7 @@ function sendVerificationEmail(to, token) {
 								<tr align="center">
 								  
 								  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-									<a href="https://www.facebook.com/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+									<a href="https://www.facebook.com/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 									  
 									  
 									  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/facebook_circle_color.png" alt="Facebook" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1001,14 +988,12 @@ function sendVerificationEmail(to, token) {
 	return new Promise(function (resolve, reject) {
 		sg.API(request, function (error, response) {
 			if (error) {
-				console.log(error);
+				console.log("mail",error);
 				reject(error);
-				//return error;
 			}
 			else {
-				console.log(response);
+				console.log("mail",response);
 				resolve(response);
-				//return response;
 			}
 		});
 	});
@@ -1037,10 +1022,12 @@ function sendEmail(to, templateId,param1=null,param2=null) {
 	return new Promise(function (resolve, reject) {
 		sg.API(request, function (error, response) {
 			if (error) {
+				console.log(error,"mail");
 				reject(error);
 				//return error;
 			}
 			else {
+				console.log(response,"mail");
 				resolve(response);
 				//return response;
 			}
@@ -1048,7 +1035,7 @@ function sendEmail(to, templateId,param1=null,param2=null) {
 	});
 }
 
-function getEmailTemplate(templateId, to,param1,param2) {
+function getEmailTemplate(templateId,to,param1,param2) {
 	var body = null;
 	switch (templateId) {
 		case 1:
@@ -1060,19 +1047,19 @@ function getEmailTemplate(templateId, to,param1,param2) {
 								email: to
 							}
 						],
-						subject: "Growspace : Welcome to Growspace, Your Home to Crypto Investment"
+						subject: "Coin Aska : Welcome to Coin Aska, Your Home to Crypto Investment"
 					}
 				],
 				from: {
-					email: process.env.fromMail
+					email: process.env.FROM_EMAIL
 				},
 				content: [
 					{
 						type: 'text/html',
 						value: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml" lang="en"><head>
-						<title>Welcome to Growspace!</title>
-						<meta property="og:title" content="Welcome to Growspace!">
-						<meta name="twitter:title" content="Welcome to Growspace!">
+						<title>Welcome to Coin Aska!</title>
+						<meta property="og:title" content="Welcome to Coin Aska!">
+						<meta name="twitter:title" content="Welcome to Coin Aska!">
 						
 						
 						
@@ -1203,7 +1190,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 							<tr>
 								<td align="center" valign="top" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; color:#23496d; word-break:break-word; text-align:center; padding:10px 20px; font-size:0px">
 									
-									<img alt="Growspace 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Growspace%2002.png?width=400&amp;upscale=true&amp;name=Growspace%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
+									<img alt="Coin Aska 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Coin Aska%2002.png?width=400&amp;upscale=true&amp;name=Coin Aska%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
 									
 								</td>
 							</tr>
@@ -1244,15 +1231,15 @@ function getEmailTemplate(templateId, to,param1,param2) {
 					  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0 !important; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt"><tbody><tr><td class="hs_padded" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:10px 20px"><div id="hs_cos_wrapper_module_16593585773381" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="module"><div id="hs_cos_wrapper_module_16593585773381_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><h2 style="margin:0; mso-line-height-rule:exactly; line-height:175%; font-size:22px; text-align:center" align="center">Welcome Aboard!</h2></div></div></td></tr></tbody></table>
 					<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0 !important; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt"><tbody><tr><td class="hs_padded" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:10px 20px"><div id="hs_cos_wrapper_module-0-0-0" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="module"><div id="hs_cos_wrapper_module-0-0-0_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p style="mso-line-height-rule:exactly; line-height:175%">Hi,</p>
 					<p style="mso-line-height-rule:exactly; line-height:175%">&nbsp;</p>
-					<p style="mso-line-height-rule:exactly; line-height:175%">Welcome! It’s never been easier to participate in crypto’s growth story. <strong>With Growspace, you not only invest in the best assets of the future but also with local compliance.</strong> We take care of all the fundamental research so that you don’t need to worry about where your money is going, plus you stay updated at every step.</p>
+					<p style="mso-line-height-rule:exactly; line-height:175%">Welcome! It’s never been easier to participate in crypto’s growth story. <strong>With Coin Aska, you not only invest in the best assets of the future but also with local compliance.</strong> We take care of all the fundamental research so that you don’t need to worry about where your money is going, plus you stay updated at every step.</p>
 					<p style="mso-line-height-rule:exactly; line-height:175%">Wherever you are in your crypto journey, we’re glad you are with us. Looking forward to long-term wealth creation, together!</p>
 					<p style="mso-line-height-rule:exactly; line-height:175%">&nbsp;</p>
-					<p style="mso-line-height-rule:exactly; line-height:175%">P.S: Curious to know our investment process? Click here → <a href="https://docsend.com/view/a8vr4dadyrwwkh26" style="mso-line-height-rule:exactly; color:#00a4bd" data-hs-link-id="0" target="_blank">Growspace Investment Whitepaper</a></p>
+					<p style="mso-line-height-rule:exactly; line-height:175%">P.S: Curious to know our investment process? Click here → <a href="https://docsend.com/view/a8vr4dadyrwwkh26" style="mso-line-height-rule:exactly; color:#00a4bd" data-hs-link-id="0" target="_blank">Coin Aska Investment Whitepaper</a></p>
 					<p style="mso-line-height-rule:exactly; line-height:175%">&nbsp;</p>
 					<p style="mso-line-height-rule:exactly; line-height:175%">Feel free to reach out to us in case of any query at <a href="/cdn-cgi/l/email-protection#04777174746b76704463766b7377746567612a656d" rel="noopener" style="mso-line-height-rule:exactly; color:#00a4bd" data-hs-link-id="0" target="_blank"><span class="__cf_email__" data-cfemail="12616762627d60665275607d6561627371773c737b">[email&#160;protected]</span></a></p>
 					<p style="mso-line-height-rule:exactly; line-height:175%">&nbsp;</p>
 					<p style="mso-line-height-rule:exactly; line-height:175%">Regards,</p>
-					<p style="mso-line-height-rule:exactly; line-height:175%">Team Growspace</p></div></div></td></tr></tbody></table>
+					<p style="mso-line-height-rule:exactly; line-height:175%">Team Coin Aska</p></div></div></td></tr></tbody></table>
 					</div>
 					<!--[if gte mso 9]></table><![endif]-->
 					<!--[if (mso)|(IE)]></td><![endif]-->
@@ -1300,7 +1287,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 							<tr>
 								<td align="center" valign="top" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; color:#23496d; word-break:break-word; text-align:center; padding:10px 20px; font-size:0px">
 									
-									<img alt="Growspace Logo_png" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Growspace%20Logo_png.png?width=1120&amp;upscale=true&amp;name=Growspace%20Logo_png.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="560" align="middle">
+									<img alt="Coin Aska Logo_png" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Coin Aska%20Logo_png.png?width=1120&amp;upscale=true&amp;name=Coin Aska%20Logo_png.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="560" align="middle">
 									
 								</td>
 							</tr>
@@ -1320,7 +1307,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 								<tr align="center">
 								  
 								  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-									<a href="https://instagram.com/growspace.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+									<a href="https://instagram.com/Coin Aska.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 									  
 									  
 									  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.114/img/hs_default_template_images/modules/Follow+Me+-+Email/instagram_circle_color.png" alt="Instagram" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1340,7 +1327,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 								<tr align="center">
 								  
 								  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-									<a href="https://www.linkedin.com/company/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+									<a href="https://www.linkedin.com/company/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 									  
 									  
 									  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.114/img/hs_default_template_images/modules/Follow+Me+-+Email/linkedin_circle_color.png" alt="LinkedIn" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1360,7 +1347,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 								<tr align="center">
 								  
 								  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-									<a href="https://twitter.com/growspaceai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+									<a href="https://twitter.com/Coin Askaai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 									  
 									  
 									  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.114/img/hs_default_template_images/modules/Follow+Me+-+Email/twitter_circle_color.png" alt="Twitter" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1380,7 +1367,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 								<tr align="center">
 								  
 								  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-									<a href="https://www.facebook.com/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+									<a href="https://www.facebook.com/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 									  
 									  
 									  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.114/img/hs_default_template_images/modules/Follow+Me+-+Email/facebook_circle_color.png" alt="Facebook" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1513,11 +1500,11 @@ function getEmailTemplate(templateId, to,param1,param2) {
 								email: to
 							}
 						],
-						subject: "Growspace : Daily Report"
+						subject: "Coin Aska : Daily Report"
 					}
 				],
 				from: {
-					email: process.env.fromMail
+					email: process.env.FROM_EMAIL
 				},
 				content: [
 					{
@@ -1552,11 +1539,11 @@ function getEmailTemplate(templateId, to,param1,param2) {
 								email: to
 							}
 						],
-						subject: "Growspace : OTP for transaction"
+						subject: "Coin Aska : OTP for transaction"
 					}
 				],
 				from: {
-					email: process.env.fromMail
+					email: process.env.FROM_EMAIL
 				},
 				content: [
 					{
@@ -1696,7 +1683,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 								<tr>
 									<td align="center" valign="top" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; color:#23496d; word-break:break-word; text-align:center; padding:10px 20px; font-size:0px">
 										
-										<img alt="Growspace 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Growspace%2002.png?width=400&amp;upscale=true&amp;name=Growspace%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
+										<img alt="Coin Aska 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Coin Aska%2002.png?width=400&amp;upscale=true&amp;name=Coin Aska%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
 										
 									</td>
 								</tr>
@@ -1741,7 +1728,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 						<p style="mso-line-height-rule:exactly; text-align:center; font-size:24px; line-height:175%" align="center">&nbsp;</p>
 						<p style="mso-line-height-rule:exactly; line-height:175%">Your one-time password is confidential. Please do not share the OTP with anyone.</p>
 						<p style="mso-line-height-rule:exactly; line-height:175%">&nbsp;</p>
-						<p style="mso-line-height-rule:exactly; line-height:175%">Regards,<br>Team Growspace</p></div></div></td></tr></tbody></table>
+						<p style="mso-line-height-rule:exactly; line-height:175%">Regards,<br>Team Coin Aska</p></div></div></td></tr></tbody></table>
 						</div>
 						<!--[if gte mso 9]></table><![endif]-->
 						<!--[if (mso)|(IE)]></td><![endif]-->
@@ -1788,7 +1775,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 									<tr align="center">
 									  
 									  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-										<a href="https://instagram.com/growspace.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+										<a href="https://instagram.com/Coin Aska.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 										  
 										  
 										  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/instagram_circle_color.png" alt="Instagram" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1808,7 +1795,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 									<tr align="center">
 									  
 									  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-										<a href="https://www.linkedin.com/company/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+										<a href="https://www.linkedin.com/company/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 										  
 										  
 										  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/linkedin_circle_color.png" alt="LinkedIn" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1828,7 +1815,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 									<tr align="center">
 									  
 									  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-										<a href="https://twitter.com/growspaceai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+										<a href="https://twitter.com/Coin Askaai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 										  
 										  
 										  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/twitter_circle_color.png" alt="Twitter" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1848,7 +1835,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 									<tr align="center">
 									  
 									  <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-										<a href="https://www.facebook.com/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+										<a href="https://www.facebook.com/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 										  
 										  
 										  <img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.108/img/hs_default_template_images/modules/Follow+Me+-+Email/facebook_circle_color.png" alt="Facebook" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
@@ -1975,11 +1962,11 @@ function getEmailTemplate(templateId, to,param1,param2) {
 									email: to
 								}
 							],
-							subject: "Growspace : Funds added| Transaction in your Growspace wallet"
+							subject: "Coin Aska : Funds added| Transaction in your Coin Aska wallet"
 						}
 					],
 					from: {
-						email: process.env.fromMail
+						email: process.env.FROM_EMAIL
 					},
 					content: [
 						{
@@ -2073,7 +2060,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 																		 <tbody>
 																			<tr>
 																			   <td align="center" valign="top" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; color:#23496d; word-break:break-word; text-align:center; padding:10px 20px; font-size:0px">
-																				  <img alt="Growspace 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Growspace%2002.png?width=400&amp;upscale=true&amp;name=Growspace%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
+																				  <img alt="Coin Aska 02" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Coin Aska%2002.png?width=400&amp;upscale=true&amp;name=Coin Aska%2002.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="200" align="middle">
 																			   </td>
 																			</tr>
 																		 </tbody>
@@ -2116,11 +2103,11 @@ function getEmailTemplate(templateId, to,param1,param2) {
 																					 <div id="hs_cos_wrapper_module-0-0-0_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="color: inherit; font-size: inherit; line-height: inherit;" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text">
 																						<p style="mso-line-height-rule:exactly; line-height:175%">Hi ${param1},</p>
 																						<p style="mso-line-height-rule:exactly; line-height:175%">&nbsp;</p>
-																						<p style="mso-line-height-rule:exactly; line-height:175%">A deposit of the amount of ${param2} has been received in your Growspace wallet. The amount will be duly invested in the next Thursday. Open the in-app wallet to view the detail of the transaction.</p>
+																						<p style="mso-line-height-rule:exactly; line-height:175%">A deposit of the amount of ${param2} has been received in your Coin Aska wallet. The amount will be duly invested in the next Thursday. Open the in-app wallet to view the detail of the transaction.</p>
 																						<p style="mso-line-height-rule:exactly; line-height:175%">&nbsp;</p>
 																						<p style="mso-line-height-rule:exactly; line-height:175%">Wherever you are in your crypto journey, we’re glad you are with us. Looking forward to long-term wealth creation, together!</p>
 																						<p style="mso-line-height-rule:exactly; line-height:175%">&nbsp;</p>
-																						<p style="mso-line-height-rule:exactly; line-height:175%">Regards,<br>Team Growspace</p>
+																						<p style="mso-line-height-rule:exactly; line-height:175%">Regards,<br>Team Coin Aska</p>
 																					 </div>
 																				  </div>
 																			   </td>
@@ -2162,7 +2149,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 																			   <tbody>
 																				  <tr>
 																					 <td align="center" valign="top" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; color:#23496d; word-break:break-word; text-align:center; padding:10px 20px; font-size:0px">
-																						<img alt="Growspace Logo_png" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Growspace%20Logo_png.png?width=1120&amp;upscale=true&amp;name=Growspace%20Logo_png.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="560" align="middle">
+																						<img alt="Coin Aska Logo_png" src="https://20659291.fs1.hubspotusercontent-na1.net/hub/20659291/hubfs/Coin Aska%20Logo_png.png?width=1120&amp;upscale=true&amp;name=Coin Aska%20Logo_png.png" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; max-width:100%; font-size:16px" width="560" align="middle">
 																					 </td>
 																				  </tr>
 																			   </tbody>
@@ -2182,7 +2169,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 																									   <tbody>
 																										  <tr align="center">
 																											 <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-																												<a href="https://instagram.com/growspace.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+																												<a href="https://instagram.com/Coin Aska.ai?igshid=NWRhNmQxMjQ=" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 																												<img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.114/img/hs_default_template_images/modules/Follow+Me+-+Email/instagram_circle_color.png" alt="Instagram" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
 																												</a>
 																											 </td>
@@ -2195,7 +2182,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 																									   <tbody>
 																										  <tr align="center">
 																											 <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-																												<a href="https://www.linkedin.com/company/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+																												<a href="https://www.linkedin.com/company/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 																												<img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.114/img/hs_default_template_images/modules/Follow+Me+-+Email/linkedin_circle_color.png" alt="LinkedIn" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
 																												</a>
 																											 </td>
@@ -2208,7 +2195,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 																									   <tbody>
 																										  <tr align="center">
 																											 <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-																												<a href="https://twitter.com/growspaceai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+																												<a href="https://twitter.com/Coin Askaai?s=21&amp;t=ryYxPbtEGZ9HjkoHsXJIgQ" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 																												<img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.114/img/hs_default_template_images/modules/Follow+Me+-+Email/twitter_circle_color.png" alt="Twitter" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
 																												</a>
 																											 </td>
@@ -2221,7 +2208,7 @@ function getEmailTemplate(templateId, to,param1,param2) {
 																									   <tbody>
 																										  <tr align="center">
 																											 <td class="display_block_on_small_screens" style="border-collapse:collapse; mso-line-height-rule:exactly; font-family:Arial, sans-serif; font-size:15px; color:#23496d; word-break:break-word; padding:8px 5px; line-height:1; vertical-align:middle" valign="middle">
-																												<a href="https://www.facebook.com/growspaceai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
+																												<a href="https://www.facebook.com/Coin Askaai/" style="color:#00a4bd; mso-line-height-rule:exactly; text-decoration:none !important" data-hs-link-id="0" target="_blank">
 																												<img src="https://hs-20659291.f.hubspotstarter.net/hs/hsstatic/TemplateAssets/static-1.114/img/hs_default_template_images/modules/Follow+Me+-+Email/facebook_circle_color.png" alt="Facebook" height="25" style="outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; border:none; width:auto!important; height:25px!important; vertical-align:middle" valign="middle" width="auto">
 																												</a>
 																											 </td>

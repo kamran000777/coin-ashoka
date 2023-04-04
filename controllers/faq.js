@@ -23,4 +23,13 @@ async function getAboutData(req, res) {
     }
 }
 
-module.exports = {getFaqData,getAboutData}
+async function getPolicyData(req, res) {
+    try {
+        const result =  faqDao.policy;
+        requestHandler.sendSuccess(res, 'Success', result);
+    } catch (error) {
+        requestHandler.sendError(req, res, error);
+    }
+}
+
+module.exports = {getFaqData,getAboutData,getPolicyData}

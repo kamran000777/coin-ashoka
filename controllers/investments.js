@@ -15,7 +15,8 @@ async function getUserPortfolio(req,res,next){
         const user = auth.getUserInfo(req);  
         const dbresult = await investmentsDao.getUserPortfolio(user);
         const result = dbresult.rows;
-        requestHandler.sendSuccess(res, 'Success',JSON.parse(result[0]['fn_get_user_portfolio']));
+        const content = JSON.parse(result[0]['fn_get_user_portfolio']);
+        requestHandler.sendSuccess(res, 'Success',content);
     }catch(error){
         requestHandler.sendError(req, res, error);
     }
@@ -29,6 +30,7 @@ async function getUserDashboard(req,res,next){
         const result = JSON.parse(dbresult[0]['get_user_portfolio']);
   
         const data = result;
+        data.portfolio['about']= 'Welcome to Coin Ashoka, your go-to platform for easy, safe, and profitable crypto investments. With a fixed 2% interest rate every month on your invested amount, you can watch your savings grow while taking advantage of the exciting world of cryptocurrency.\nJoin us today and start investing in the future of finance!'
         requestHandler.sendSuccess(res, 'Success',data);
     }catch(error){
         requestHandler.sendError(req, res, error);
