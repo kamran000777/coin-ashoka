@@ -1,4 +1,5 @@
 var request = require('request');
+const urlBuilder = require('build-url');
 
 function getRandomInt(min, max) {
   return Math.floor(
@@ -99,4 +100,17 @@ function toDateTime(secs) {
   return t;
 }
 
-module.exports = { getRandomInt, getCoinPrices, getCryptoHistoryPrices,getDateString,toDateTime,randomString}
+
+function makeDynamicLongLink(endpoint, token, toEmail) {
+  const hostUrl = process.env.hostURL;
+  const baseUrl = process.env.baseUrl;
+  const appPackage = process.env.appPackage;
+return urlBuilder(`${baseUrl}`, {
+  queryParams: {
+    link: hostUrl + "/" + endpoint + "?" + "token=" + token + "&email=" + toEmail,
+    apn: appPackage,
+  }
+});
+}
+
+module.exports = { getRandomInt, getCoinPrices, getCryptoHistoryPrices,getDateString,toDateTime,randomString,makeDynamicLongLink}

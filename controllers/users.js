@@ -58,7 +58,6 @@ async function getCryptoCoinHistoryPrices(req, res) {
         //console.log("Result is:", result);
         requestHandler.sendSuccess(res, 'Success', JSON.parse(result));
         const coin_name = (req.query.coin_pair).split('-')[1];
-        console.log("coin_name is:", coin_name);
         const data = await coinsDao.insertHistoryCoinPrices(coin_name, result);
         requestHandler.sendSuccess(res, 'Success', data);
     } catch (error) {

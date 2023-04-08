@@ -68,11 +68,9 @@ async function getEligibleInvestmentForSendmail(req,res,next){
         for (var i = 0; i < investmentTxnDetails.length; i++) {
 
             const emailResponse = await email.sendEmail(investmentTxnDetails[i]['email'], 4,investmentTxnDetails[i]['name'],investmentTxnDetails[i]['amount']+' '+investmentTxnDetails[i]['currency']);
-            console.log("Email Response:",emailResponse);
 
             if(investmentTxnDetails[i]['device_token']!=null){
             const notifResponse = await firebase.sendNotification(investmentTxnDetails[i]['device_token'],title,message);
-            console.log("Notification Response:",notifResponse);
             }
         }
         requestHandler.sendSuccess(res, 'Success');
@@ -107,7 +105,6 @@ async function pushOnmetaLatestTxn(req, res, next){
     try {
        
        var network="Polygon";
-       console.log('response',req.body.streamId)
 
         const response = (await cryptoApiLogs.insertCryptoWebhookOrders(req.body.orderId,req.body.receiverWalletAddress,req.body.status,req.body.currency,'Buy',req.body.fiat,network,req.body.buyTokenSymbol,req.body.createdAt,req.body.transferredAmount,req.body.txnHash,req.body.buyTokenAddress)).rows;
 

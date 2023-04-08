@@ -1,22 +1,17 @@
-//import crypto from 'crypto-random-string';
-
 const usersDao = require('../dao/users');
 const investmentsDao = require('../dao/investments.js');
-// const wallet = require('../controllers/wallet.js');
-// const userCryptoDepositWalletAddresses = require('../dao/userCryptoDepositWalletAddresses.js');
 const RequestHandler = require('../utils/RequestHandler');
 const config = require('../config/appconfig');
 const jwt = require('jsonwebtoken');
 const Logger = require('../utils/logger');
 const auth = require('../utils/auth');
-const email = require('../utils/email');
-// const common = require('../utils/common');
-// const hubspot = require('@hubspot/api-client');
+const email = require('../utils/emailTemplate');
 const logger = new Logger();
 const requestHandler = new RequestHandler(logger);
 const {Str} = require('@supercharge/strings')
-
 const { db } = require('../utils/dbconfig.js');
+const emailSender = require('../utils/emailSender');
+const common = require('../utils/common');
 
 async function signup(req, res, next) {
 
@@ -53,22 +48,23 @@ async function signup(req, res, next) {
             return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
         }
 
-        // if (!is_verified) {
-        //     const tokenResult = await usersDao.createVerificationToken(userdata[0]['id'], emailToken);
-        //     const tokenInfo = tokenResult.rows;
+        if (!is_verified) {
+            const tokenResult = await usersDao.createVerificationToken(userdata[0]['id'], emailToken);
+            const tokenInfo = tokenResult.rows;
 
-        //     if (tokenInfo[0]['id'] == null) {
-        //         return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
-        //     }
-        //     const emailResponse = await email.sendVerificationEmail(userdata[0]['email'], emailToken);
-        // }
+            if (tokenInfo[0]['id'] == null) {
+                return requestHandler.sendErrorMsg(res, "Something Went Wrong!");
+            }
+
+        const link = common.makeDynamicLongLink("emailVerification",emailToken,userdata[0]['email']);
+        const emailResponse = await emailSender.sendEmail([{email:userdata[0]['email']}],email.getEmailTitle("signUp"),email.getEmailTemplate("signUp",link));
+        }
 
         // let referral_code = referralCodeGenerator.alpha('uppercase', 5);
         // await referrals.createReferralCode(userdata, referral_code);
         const result = { userdetails: userdata[0] };
         await db.query('COMMIT');
-        // requestHandler.sendSuccess(res, 'User Registered Successfully and sent verification link on mail. Please verify your email.', result);
-        requestHandler.sendSuccess(res, 'User Registered. Login to continue.', result);
+        requestHandler.sendSuccess(res, 'User Registered Successfully and sent verification link on mail. Please verify your email.', result);
 
     } catch (error) {
         await db.query('ROLLBACK');
@@ -141,21 +137,6 @@ async function googleLogin(req, res, next) {
             }
         }
 
-        // const referralResult = (await referrals.getReferralCode(userdata)).rows;
-        // const referralDetails = JSON.parse(referralResult[0]['fn_get_referral_details']);
-        // if (referralDetails == null) {
-        //     /* a unique referral code the user can share */
-        //     let referral_code = referralCodeGenerator.alpha('uppercase', 5);
-        //     // console.log("referral_code", referral_code);
-
-        //     await referrals.createReferralCode(userdata, referral_code);
-        // }
-
-        // const walletAddress = (await userCryptoDepositWalletAddresses.getCryptoAddress(userdata[0]['id'])).rows;
-
-        // if(!walletAddress[0]){
-        //     await wallet.generateDepositAddress(userdata[0]['id'],userdata[0]['email']);
-        // }
         if(!userdata[0]['is_invesment_table_created']){
             await investmentsDao.insertEntryInInvestment(userdata[0]['id']); 
             await usersDao.updateInvestmentTableEntry(userdata);
@@ -228,7 +209,7 @@ async function emailVerification(req, res) {
     try {
         const dbresult = await usersDao.get(req.query);
         var userdata = dbresult.rows;
-
+        
         if (!userdata[0]['email']) {
             return requestHandler.sendSuccess(res, 'Email not found', null, 403);
         }
@@ -237,10 +218,16 @@ async function emailVerification(req, res) {
         }
         const tokenRes = await usersDao.verifyToken(userdata[0]['id'], req.query.token);
         const tokenInfo = tokenRes.rows;
-       
         if (!tokenInfo[0]['token']) {
             return requestHandler.sendSuccess(res, 'Token expired', null, 403);
         }
+
+
+        if(!userdata[0]['is_invesment_table_created']){
+            await investmentsDao.insertEntryInInvestment(userdata[0]['id']); 
+            await usersDao.updateInvestmentTableEntry(userdata);
+          }
+
         await usersDao.updateTokenStatus(tokenInfo[0]['id']);
         await usersDao.updateVerifiedFlag(userdata[0]['id']);
 
@@ -272,28 +259,12 @@ async function forgotPassword(req, res, next) {
     try {
         const dbresult = await usersDao.get(req.body);
         var userdata = dbresult.rows;
-        console.log('Data :', userdata);
 
         if (!userdata[0]) {
             return requestHandler.sendSuccess(res, 'User Not registered', userdata[0], 400);
         }
-        // const to_eamil = 'pawansinghal150@gmail.com';
-
-        // const randomString = common.getRandomInt(100000, 999999);
-        // const subject = 'Sending with SendGrid is Fun';
-        // const textContent = `please consider the following as your password${randomString}`;
-        // const htmlContent = `<p style="font-size: 32px;">Hello </p>  please consider the following as your password: ${randomString}`;
-
-
-
-        // const otpSentTime = new Date();
-
-        // const otpresult = await usersDao.insertOtp(req.body.email, randomString, otpSentTime);
-        // const emailResponse = email.sendSingleEmail(config.sendgrid.from_email, req.body.email, subject, textContent, htmlContent);
-
+        
         const emailToken = Str.random(16);
-        console.log("Email Response is :", emailToken);
-
 
         const tokenResult = await usersDao.createVerificationToken(userdata[0]['id'], emailToken);
         const tokenInfo = tokenResult.rows;
@@ -302,7 +273,9 @@ async function forgotPassword(req, res, next) {
             return requestHandler.sendError(req, res, error);
         }
 
-        // const emailResponse = await email.sendPasswordResetEmail(userdata[0]['email'], emailToken);
+        const link = common.makeDynamicLongLink("resetPassword",emailToken,userdata[0]['email']);
+        const emailResponse = await emailSender.sendEmail([{email:userdata[0]['email']}],email.getEmailTitle("reset"),email.getEmailTemplate("reset",link));
+        
 
         requestHandler.sendSuccess(res, 'Password Reset Link Send Successfully',{} );
     } catch (error) {
@@ -346,43 +319,11 @@ async function resetPassword(req, res) {
 
 }
 
-/*async function forgotPassword(req,res,next){
-    try{
-        console.log('Request Body is:',req.body);
-        const dbresult = await usersDao.get(req.body);
-        var userdata = dbresult.rows;
-        console.log('Data :',userdata);
-    
-        if(!userdata[0]){
-            requestHandler.sendSuccess(res, 'User Not registered',userdata[0],400);
-        }
-        const to_eamil = 'pawansinghal150@gmail.com';
-        
-        const randomString = common.getRandomInt(100000,999999);
-        const  subject = 'Growspace : Forgot Password Otp';
-        const  textContent = `please consider the following as your otp${randomString}`;
-        const  htmlContent = `please consider the following as your otp: ${randomString}`;
-
-
-
-        const otpSentTime = new Date();
-    
-        const otpresult = await usersDao.insertOtp(req.body.email,randomString,otpSentTime);
-        const emailResponse = email.sendSingleEmail(config.sendgrid.from_email,req.body.email,subject,textContent,htmlContent);
-
-        requestHandler.sendSuccess(res, 'Otp Send Successfully',emailResponse);
-    }catch(error){
-        requestHandler.sendError(req, res, error);
-    }
-
-}*/
 
 async function verifyOtp(req, res, next) {
     try {
-        console.log('Request Body is:', req.body);
         const dbresult = await usersDao.verifyOtp(req.body);
         var userdata = dbresult.rows;
-        console.log('Data :', userdata);
 
         if (!userdata[0]) {
             return requestHandler.sendSuccess(res, 'Invalid Otp', userdata[0], 400);
@@ -464,7 +405,6 @@ async function updateUserDetails(req, res, next) {
         const user = auth.getUserInfo(req);
         const userdata = (await usersDao.updateUserInfo(user, req.body)).rows;
 
-        console.log(userdata);
 
         if (!userdata[0]) {
             return requestHandler.sendSuccess(res, 'Invalid User Details', userdata[0], 400);

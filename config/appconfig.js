@@ -30,7 +30,7 @@ module.exports = {
 	sendgrid: {
 		api_key: process.env.SEND_MAIL_API_KEY,
 		api_user: process.env.USERNAME,
-		from_email: process.env.FROM_EMAIL || 'kamranaka1998@gmail.com',
+		from_email: process.env.FROM_EMAIL || 'smartansari12345@gmail.com',
 	},
 
 };

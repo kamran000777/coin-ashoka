@@ -27,17 +27,17 @@ function getWrtPwd(dataparam){
 };
 
 function create(dataparam,encryptPass){
-    const query = 'insert into users(email,password,is_verified) values($1,$2,true) returning *';
+    const query = 'insert into users(email,password) values($1,$2) returning *';
     return db.query(query,[dataparam.email,encryptPass]);
 };
 
 function createVerificationToken(userId,emailToken){
-    const query = 'insert into verification_tokens(id,token) values($1,$2) returning *';
+    const query = 'insert into verification_tokens(user_id,token) values($1,$2) returning *';
     return db.query(query,[userId,emailToken]);
 };
 
 function verifyToken(userId,emailToken){
-    const query = "select * from verification_tokens where id=$1 and token=$2 and entrytime>now() - interval '1 days' and update_time is null order by id desc limit 1";
+    const query = "select * from verification_tokens where user_id=$1 and token=$2 and entrytime>now() - interval '1 days' and update_time is null order by id desc limit 1";
     return db.query(query,[userId,emailToken]);
 };
 
