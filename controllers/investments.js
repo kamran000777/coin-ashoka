@@ -30,7 +30,10 @@ async function getUserDashboard(req,res,next){
         const result = JSON.parse(dbresult[0]['get_user_portfolio']);
   
         const data = result;
-        data.portfolio['about']= 'Welcome to Coin Ashoka, your go-to platform for easy, safe, and profitable crypto investments. With a fixed 2% interest rate every month on your invested amount, you can watch your savings grow while taking advantage of the exciting world of cryptocurrency.\nJoin us today and start investing in the future of finance!'
+        data.portfolio['about']= 'Welcome to Coin Ashoka, your go-to platform for easy, safe, and profitable crypto investments. With a fixed 2% interest rate every month on your invested amount, you can watch your savings grow while taking advantage of the exciting world of cryptocurrency.\nJoin us today and start investing in the future of finance!';
+          
+        const is_update_required = result['user_details']['app_version']!=='1.0.0';
+        result['user_details']['is_update_required'] = is_update_required;
         requestHandler.sendSuccess(res, 'Success',data);
     }catch(error){
         requestHandler.sendError(req, res, error);
@@ -54,7 +57,7 @@ async function getOrderHistory(req, res){
     try {
         const user = auth.getUserInfo(req);
         const dbresult = (await investmentsDao.getOrderHistory(user)).rows;
-        const result = JSON.parse(dbresult[0]['fn_get_transaction_history'])
+        const result = JSON.parse(dbresult[0]['fn_get_transaction_history']);
         requestHandler.sendSuccess(res, 'Success', result);
     } catch (error) {
         requestHandler.sendError(req, res, error);
