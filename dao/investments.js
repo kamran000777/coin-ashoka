@@ -31,7 +31,7 @@ function getEligibleInvestments(){
 
 
 function insertEntryInInvestment(id){
-    const query = `insert into investments (user_id,coin_id,amount,quantity,usdc_amount,currency) values ($1,1,0,0,0,'INR')`;
+    const query = `insert into investments(user_id,coin_id,amount,quantity,usdc_amount,currency) values ($1,1,0,0,0,'INR')`;
     return db.query(query,[id]);
 }
 
@@ -46,13 +46,13 @@ function updateCryptoTxnStatus(resData){
     return db.query(query,[resData.merchantOrderId,resData,resData.paymentStatus]);
 }
 
-function updateInvestmentEntry(id,reqid,tnxId,status,amount,currency,crypto_order_id,usdc_amount){
-    const query = `insert into deposits(user_id,reqid,txnid,status,amount,currency,usdt_amount,crypto_order_id,usdc_amount,tnx_type)  values($1,$2,$3,$4,public.get_crypto_quantity($5),$6,0,$7,$8,'Buy') returning user_id`;
-    return db.query(query,[id,reqid,tnxId,status,amount,currency,crypto_order_id,usdc_amount]);
+function updateInvestmentEntry(id,reqid,tnxId,status,amount,currency,crypto_order_id,usdt_amount){
+    const query = `insert into deposits(user_id,reqid,txnid,status,amount,currency,usdt_amount,crypto_order_id,usdc_amount,tnx_type)  values($1,$2,$3,$4,public.get_crypto_amount($5),$6,$8,$7,0,'Buy') returning user_id`;
+    return db.query(query,[id,reqid,tnxId,status,amount,currency,crypto_order_id,usdt_amount]);
 }
 
 function updatePortfolio(quantity,id){
-    const query = 'update investments set amount=amount+public.get_crypto_quantity($1), quantity=quantity+$1 where user_id=$2 returning user_id';
+    const query = 'update investments set amount=amount+public.get_crypto_amount($1),quantity=quantity+public.get_crypto_quantity($1),usdt_amount=usdt_amount+($1) where user_id=$2 returning user_id';
     return db.query(query,[quantity,id]);
 }
 

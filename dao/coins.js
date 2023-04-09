@@ -3,7 +3,7 @@ const { db } = require('../utils/dbconfig.js');
 
 function insertLatestCoinPrices(usdc_price) {
 
-    const query = `update coins set price_usdc=$1`;
+    const query = `update coins set price_usdt=$1`;
     return db.query(query,[usdc_price]);
 }
 

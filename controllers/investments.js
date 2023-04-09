@@ -104,7 +104,7 @@ async function updateCryptoTxnStatus(req, res, next) {
 async function pushOnmetaLatestTxn(req, res, next){
     try {
        
-       var network="Polygon";
+       var network="BSC";
 
         const response = (await cryptoApiLogs.insertCryptoWebhookOrders(req.body.orderId,req.body.receiverWalletAddress,req.body.status,req.body.currency,'Buy',req.body.fiat,network,req.body.buyTokenSymbol,req.body.createdAt,req.body.transferredAmount,req.body.txnHash,req.body.buyTokenAddress)).rows;
 

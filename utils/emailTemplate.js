@@ -394,6 +394,7 @@ const getEmailTitle=(type)=>{
       case "signUp":
          return 'Coin Aska : Verify Your E-mail Address';
       break;
+      
       case "reset":
          return 'Coin Aska : Reset Your Password';
       break;
