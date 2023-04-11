@@ -30,7 +30,7 @@ async function getUserDashboard(req,res,next){
         const result = JSON.parse(dbresult[0]['get_user_portfolio']);
   
         const data = result;
-        data.portfolio['about']= 'Welcome to Coin Ashoka, your go-to platform for easy, safe, and profitable crypto investments. With a fixed 2% interest rate every month on your invested amount, you can watch your savings grow while taking advantage of the exciting world of cryptocurrency.\nJoin us today and start investing in the future of finance!';
+        data.portfolio['about']= 'Welcome to Coin Aska, your go-to platform for easy, safe, and profitable crypto investments. With a fixed 2% interest rate every month on your invested amount, you can watch your savings grow while taking advantage of the exciting world of cryptocurrency.\nJoin us today and start investing in the future of finance!';
           
         const is_update_required = result['user_details']['app_version']!=='1.0.0';
         result['user_details']['is_update_required'] = is_update_required;
